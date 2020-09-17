@@ -7,3 +7,6 @@
 [submodule "vim/plugins/nord-vim"]
 	path = vim/plugins/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule "vim/plugins/nerdtree"]
+	path = vim/plugins/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
