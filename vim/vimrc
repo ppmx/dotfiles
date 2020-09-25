@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugins')
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -29,3 +30,4 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " <CTRL> + b will open the NERDTree browser
 map <C-b> :NERDTreeToggle<CR>
+
