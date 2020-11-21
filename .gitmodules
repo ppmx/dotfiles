@@ -1,21 +1,6 @@
-[submodule "vim/vim-plug"]
-	path = vim/vim-plug
-	url = https://github.com/junegunn/vim-plug
-[submodule "vim/plugins/vim-airline"]
-	path = vim/plugins/vim-airline
-	url = https://github.com/vim-airline/vim-airline
-[submodule "vim/plugins/nord-vim"]
-	path = vim/plugins/nord-vim
-	url = https://github.com/arcticicestudio/nord-vim.git
-[submodule "vim/plugins/nerdtree"]
-	path = vim/plugins/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
 [submodule "awesome/awesome-wm-widgets"]
 	path = awesome/awesome-wm-widgets
 	url = https://github.com/streetturtle/awesome-wm-widgets
 [submodule "awesome/lain"]
 	path = awesome/lain
 	url = https://github.com/lcpz/lain
-[submodule "vim/plugins/indentLine"]
-	path = vim/plugins/indentLine
-	url = https://github.com/Yggdroot/indentLine.git
