@@ -1,53 +1,44 @@
-cursor #b48ead
-cursor_text_color background
+background #1b1b1b
+foreground #c5c8c6
 
-url_color #81a1c1
+selection_background #e8ce9c
+selection_foreground #1b1b1b
 
-active_border_color #a3be8c
-inactive_border_color #3c3d3d
-bell_border_color #bf616a
+cursor #b98fc6
 
-active_tab_foreground #cfd1d6
-active_tab_background #1f1f1f
+# special
+foreground   #c5c8c6
+background   #1b1b1b
+cursorColor  #c5c8c6
 
-inactive_tab_foreground #b1b4b7
-inactive_tab_background #3c3d3d
+# black
+color0       #1d1f21
+color8       #969896
 
-foreground #cfd1d6
-background #1f1f1f
+# red
+color1       #da6767
+color9       #eb9e9e
 
-selection_foreground #1f1f1f
-selection_background #81a1c1
+# green
+color2       #c9d368
+color10      #c9d085
 
-color0 #5a5a5c
-color8 #77787a
+# yellow
+color3       #fac45d
+color11      #e8ce9c
 
-color1 #bf616a
-color9 #C87D86
+# blue
+color4       #79a3c7
+color12      #a0bcd3
 
-color2 #a3be8c
-color10 #B2C8A1
+# magenta
+color5       #b98fc6
+color13      #cab4d0
 
-color3 #ebcb8b
-color11 #EBD2A0
+# cyan
+color6       #87bdb5
+color14      #aed0cb
 
-color4 #81a1c1
-color12 #96B1CB
-
-color5 #b48ead
-color13 #BFA1BB
-
-color6 #55b49c
-color14 #73C0AE
-
-color7 #cfd1d6
-color15 #eceff4
-
-mark1_foreground #1f1f1f
-mark1_background #55b49c
-
-mark2_foreground #1f1f1f
-mark2_background #b48ead
-
-mark3_foreground #1f1f1f
-mark3_background #ebcb8b
+# white
+color7       #caccca
+color15      #ffffff
