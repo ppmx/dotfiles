@@ -1,6 +1,14 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"        _                                                                              "
+" __   _(_)_ __ ___  _ __ ___                                                           "
+" \ \ / / | '_ ` _ \| '__/ __|                                                          "
+"  \ V /| | | | | | | | | (__                                                           "
+"   \_/ |_|_| |_| |_|_|  \___|                                                          "
+"                                                                                       "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin('~/.vim/plugins')
 
-Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
@@ -18,9 +26,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='angr'
 
 set background=dark
-
-colorscheme aurora
-hi comment ctermfg=red
+colorscheme naroka
+"hi comment ctermfg=red
 
 " stop writing .netrwhist:
 let g:netrw_dirhistmax=0
