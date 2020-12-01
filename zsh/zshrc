@@ -90,4 +90,4 @@ source $ZSH/oh-my-zsh.sh
 
 # Set personal aliases:
 alias ssh="TERM=rxvt-16color ssh"
-
+alias ip="ip -c"
