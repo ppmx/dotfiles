@@ -133,9 +133,9 @@ theme.titlebar_bg_normal = colors.background
 --                   |_|         |_|                                                   --
 -----------------------------------------------------------------------------------------
 
---theme.wallpaper_img = theme.dir .. "/wallpaper.png"
---theme.wallpaper = function (s) gears.wallpaper.maximized(theme.wallpaper_img, s, "#fff") end
-theme.wallpaper = function (s) gears.wallpaper.set("#373737") end
+theme.wallpaper_img = theme.dir .. "/wallpaper.png"
+theme.wallpaper = function (s) gears.wallpaper.tiled(theme.wallpaper_img, s) end
+--theme.wallpaper = function (s) gears.wallpaper.set("#373737") end
 
 theme.panel = "png:" .. theme.icons .. "/panel/panel.png"
 theme.font  = "sans " .. dpi(10)
