@@ -274,11 +274,10 @@ theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/
 --          |___/                                                                      --
 -----------------------------------------------------------------------------------------
 
+theme.layout_fairv      = theme.icons .. "/panel/layouts/fairv.png"
 theme.layout_floating   = theme.icons .. "/panel/layouts/floating.png"
 theme.layout_tile       = theme.icons .. "/panel/layouts/tile.png"
-theme.layout_tileleft   = theme.icons .. "/panel/layouts/tileleft.png"
 theme.layout_tilebottom = theme.icons .. "/panel/layouts/tilebottom.png"
-theme.layout_tiletop    = theme.icons .. "/panel/layouts/tiletop.png"
 
 
 
