@@ -34,12 +34,15 @@ require("awful.hotkeys_popup.keys")
 
 local lain = require("lain")
 
-local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
-local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-local brightnessarc_widget = require("awesome-wm-widgets.brightnessarc-widget.brightnessarc")
 
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+
+local workspaces = require("components.workspaces")
+--local widgets = require("components.widgets")
+
+
+local widget_helper = require("components.widgets.helpers")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -75,7 +78,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/themes/naroka/theme.lua")
+beautiful.init("~/.config/awesome/components/theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
@@ -115,17 +118,10 @@ mymainmenu = awful.menu({
 	}
 })
 
-mylauncher = awful.widget.launcher({
-	image = beautiful.awesome_icon,
-	menu = mymainmenu
-})
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
--- {{{ Wibar
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -179,12 +175,12 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+
 awful.screen.connect_for_each_screen(function(s)
-	-- Wallpaper
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4", "5", "6", "7" }, s, awful.layout.layouts[1])
+	awful.tag(workspaces.tags, s, awful.layout.layouts[1])
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -199,11 +195,16 @@ awful.screen.connect_for_each_screen(function(s)
 	awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
 	-- Create a taglist widget
-	s.mytaglist = awful.widget.taglist {
+	s.mytaglist = widget_helper.factorize_widget(awful.widget.taglist({
 		screen  = s,
 		filter  = awful.widget.taglist.filter.all,
+
+		style = {
+			shape = function (cr, w, h) gears.shape.rounded_rect(cr, w, h, 7) end
+		},
+
 		buttons = taglist_buttons
-	}
+	}))
 
 	-- Create a tasklist widget
 	s.mytasklist = awful.widget.tasklist {
@@ -213,50 +214,44 @@ awful.screen.connect_for_each_screen(function(s)
 	}
 
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(20) })
+	s.mywibox = awful.wibar({
+		position = "top",
+		screen = s,
+		height = dpi(28),
+		border_width = dpi(6),
+		bg = "#00000000"
+	})
 
 	-- Add widgets to the wibox
 	s.mywibox:setup {
-		layout = wibox.layout.align.horizontal,
-		{ -- Left widgets
-			layout = wibox.layout.fixed.horizontal,
-			mylauncher,
+		{ -- widgets left
+			require("components.widgets.logo"),
 			s.mytaglist,
-			s.mypromptbox,
-		},
-		s.mytasklist, -- Middle widget
-		{ -- Right widgets
-			wibox.widget.systray(),
-
-			brightnessarc_widget(),
-
-			volumearc_widget({
-				--get_volume_cmd = "pamixer --get-volume",
-				--inc_volume_cmd = "pamixer -i 5",
-				--dec_volume_cmd = "pamixer -d 5"
-			}),
-
-			batteryarc_widget({
-				show_current_level = true,
-				--arc_thickness = 1,
-			}),
-
-			wibox.widget.seperator,
-			mytextclock,
-			s.mylayoutbox,
+			widget_helper.factorize_widget(s.mylayoutbox),
+			widget_helper.factorize_widget(s.mypromptbox),
 			layout = wibox.layout.fixed.horizontal,
 		},
+
+		nil, -- widgets middle
+
+		{ -- widgets right
+			--widget_helper.embed_widget(wibox.widget.systray()),
+
+			--require("components.widgets.hello"),
+			require("components.widgets.calendar"),
+			require("components.widgets.clock"),
+			require("components.widgets.system"),
+
+			--wibox.widget.textbox("hello"),
+
+			layout = wibox.layout.fixed.horizontal,
+		},
+
+		layout = wibox.layout.align.horizontal,
 	}
 end)
 -- }}}
 
--- {{{ Mouse bindings
---root.buttons(gears.table.join(
---	awful.button({ }, 3, function () mymainmenu:toggle() end),
---	awful.button({ }, 4, awful.tag.viewnext),
---	awful.button({ }, 5, awful.tag.viewprev)
---))
--- }}}
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
@@ -296,16 +291,17 @@ globalkeys = gears.table.join(
 	),
 
 
-
 	-- Pulseaudio Control:
 	awful.key(
 		{}, "XF86AudioRaiseVolume",
-		function () awful.util.spawn("pamixer -i 5", false) end
+		--function () awful.util.spawn("pamixer -i 5", false) end
+		function () awful.util.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ +5%", false) end
 	),
 
 	awful.key(
 		{}, "XF86AudioLowerVolume",
-		function () awful.util.spawn("pamixer -d 5", false) end
+		--function () awful.util.spawn("pamixer -d 5", false) end
+		function () awful.util.spawn("pactl -- set-sink-volume @DEFAULT_SINK@ -5%", false) end
 	),
 
 	awful.key(
@@ -476,29 +472,12 @@ globalkeys = gears.table.join(
 		{description = "show rofi window", group = "awesome"}
 	),
 
-	awful.key(
-		{ "Control" }, "l",
-		function () awful.prompt.run {
-			prompt = "Run Lua code: ",
-			textbox = awful.screen.focused().mypromptbox.widget,
-			exe_callback = awful.util.eval,
-			history_path = awful.util.get_cache_dir() .. "/history_eval"
-		} end,
-		{ description = "Lua execute prompt", group = "awesome"}
-	),
-
-	-- Menubar
-	awful.key(
-		{ modkey }, "p", function() menubar.show() end,
-		{description = "show the menubar", group = "launcher"}
-	),
-
 	-- Dynamic Tag Renaming:
 	awful.key(
 		{ modkey }, "n",
 		function ()
 			awful.prompt.run ({
-			prompt       = "Rename tab: ",
+			prompt       = "[Rename Tab] ",
 			text         = awful.tag.selected().name .. ": ",
 			textbox      = awful.screen.focused().mypromptbox.widget,
 			exe_callback = function (s) awful.tag.selected().name = s end
@@ -698,7 +677,8 @@ awful.rules.rules = {
 				"Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
 				"Wpa_gui",
 				"veromix",
-				"xtightvncviewer"
+				"xtightvncviewer",
+				"Pcmanfm"
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -735,10 +715,11 @@ awful.rules.rules = {
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
+	c.shape = beautiful.border_shape
+
 	-- Set the windows at the slave,
 	-- i.e. put it at the end of others instead of setting it master.
 	-- if not awesome.startup then awful.client.setslave(c) end
-
 	if awesome.startup
 	and not c.size_hints.user_position
 	and not c.size_hints.program_position then
@@ -767,17 +748,23 @@ client.connect_signal(
 		awful.titlebar(c, { }) : setup {
 			{ -- Left
 				--awful.titlebar.widget.iconwidget(c),
-				buttons = buttons,
+				--buttons = buttons,
+				
+				{
+					align = "center",
+					widget = wibox.widget.textbox("  ")
+				},
+
+				{ -- Title
+					align  = "center",
+					widget = awful.titlebar.widget.titlewidget(c)
+				},
+
 				layout  = wibox.layout.fixed.horizontal
 			},
 
 			{ -- Middle
-				--{ -- Title
-				--	align  = "center",
-				--	widget = awful.titlebar.widget.titlewidget(c)
-				--},
-
-				buttons = buttons,
+				--buttons = buttons,
 				layout  = wibox.layout.flex.horizontal
 			},
 
@@ -813,4 +800,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- xinput --list : show devices and lists TrackPoint with id=12
 -- xinput --list-props 12 : show properties and list speed with id 293
 -- speed must be in range [-1,1]
-awful.util.spawn("/usr/bin/xinput set-prop 12 293 -0.42")
+-- awful.util.spawn("/usr/bin/xinput set-prop 12 293 -0.42")
+

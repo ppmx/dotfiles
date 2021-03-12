@@ -11,5 +11,5 @@
 
 configuration {
 	modi: "window,run,drun,ssh,combi";
-	theme: "naroka";
+	theme: "mx";
 }

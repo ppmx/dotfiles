@@ -1,0 +1,180 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//             __ _                                                                             //
+//  _ __ ___  / _(_)                                                                            //
+// | '__/ _ \| |_| |                                                                            //
+// | | | (_) |  _| |                                                                            //
+// |_|  \___/|_| |_|                                                                            //
+//  _ __   __ _ _ __ ___ | | ____ _  | |_| |__   ___ _ __ ___   ___                             //
+// | '_ \ / _` | '__/ _ \| |/ / _` | | __| '_ \ / _ \ '_ ` _ \ / _ \                            //
+// | | | | (_| | | | (_) |   < (_| | | |_| | | |  __/ | | | | |  __/                            //
+// |_| |_|\__,_|_|  \___/|_|\_\__,_|  \__|_| |_|\___|_| |_| |_|\___|                            //
+//                                                                                              //
+//                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+* {
+	naroka-dark1: #3d3d3d;
+	naroka-dark2: #333333;
+	naroka-dark3: #1b1b1b;
+	naroka-dark4: #141414;
+
+	naroka-light1: #d0d0d0;
+	naroka-light2: #dadada;
+	naroka-light3: #f0f0f0;
+	naroka-light4: #fefefe;
+
+	naroka-red:     #ef4343;
+	naroka-green:   #90ce42;
+	naroka-yellow:  #ffd300;
+	naroka-blue:    #6795cd;
+	naroka-magenta: #c269bc;
+	naroka-cyan:    #40d0dd;
+
+
+	naroka-cyan-dimmed: #40d0ddb0;
+
+
+	background-color: @naroka-dark4;
+	text-color: @naroka-light2;
+
+	transparent: rgba(0, 0, 0, 0);
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//           _           _                                                                      //
+// __      _(_)_ __   __| | _____      __                                                       //
+// \ \ /\ / / | '_ \ / _` |/ _ \ \ /\ / /                                                       //
+//  \ V  V /| | | | | (_| | (_) \ V  V /                                                        //
+//   \_/\_/ |_|_| |_|\__,_|\___/ \_/\_/                                                         //
+//                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+#window {
+	background-color: @naroka-dark4;
+	padding: 1px;
+
+	border: 2px;
+	border-radius: 10px;
+	border-color: @naroka-cyan;
+}
+
+// mainbox acts like a container inside window, hosting each element:
+#mainbox {
+	border:  2px;
+	padding: 5px;
+	background-color: @naroka-dark4;
+	
+}
+
+#message {
+	border:  2px 0px 0px;
+	border-color: @naroka-dark3;
+	padding:      1px;
+}
+
+// Appears at least when command was not found
+#textbox {
+	text-color: @naroka-red;
+	border-color: @naroka-red;
+	border: 3px;
+}
+
+#listview {
+	scrollbar: false;
+
+	background-color: @naroka-dark4;
+
+	spacing: 0px;
+	padding: 4px 0px 0px 0px;
+
+	border: 0px 0px 0px 0px;
+	border-color: @naroka-dark4;
+}
+
+#element {
+	border:  0px;
+	border-radius: 3px;
+	padding: 5px 10px;
+	margin: 1px;
+}
+
+
+#element.normal.normal {
+	text-color:       @naroka-light1;
+	background-color: @naroka-dark2;
+}
+
+#element.normal.urgent {
+	text-color:       @naroka-dark3;
+	background-color: @naroka-red;
+}
+
+#element.normal.active {
+	text-color:       @naroka-dark3;
+	background-color: @naroka-green;
+}
+
+#element.selected.normal {
+	text-color:       @naroka-dark4;
+	background-color: @naroka-blue;
+}
+
+#element.selected.urgent {
+	text-color:       @naroka-dark3;
+	background-color: @naroka-blue;
+}
+
+#element.selected.active {
+	text-color:       @naroka-dark3;
+	background-color: @naroka-blue;
+}
+
+#element.alternate.normal {
+	text-color:       @naroka-light1;
+	background-color: @naroka-dark1;
+}
+
+#element.alternate.urgent {
+	text-color:       @naroka-dark3;
+	background-color: @naroka-red;
+}
+
+#element.alternate.active {
+	text-color:       @naroka-dark3;
+	background-color: @naroka-green;
+}
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//                                  _                                                           //
+//  _ __  _ __ ___  _ __ ___  _ __ | |_                                                         //
+// | '_ \| '__/ _ \| '_ ` _ \| '_ \| __|                                                        //
+// | |_) | | | (_) | | | | | | |_) | |_                                                         //
+// | .__/|_|  \___/|_| |_| |_| .__/ \__|                                                        //
+// |_|                       |_|                                                                //
+//                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+#textbox-prompt-colon {
+	expand: false;
+	str: "➜ ";
+
+	text-color: @naroka-yellow;
+	background-color: @naroka-dark4;
+}
+
+#entry {
+	text-color: @naroka-yellow;
+	background-color: @naroka-dark4;
+}
+
+#inputbar {
+	children: [ textbox-prompt-colon, entry ];
+	padding: 5px 5px 3px 5px;
+	background-color: @naroka-dark4;
+}

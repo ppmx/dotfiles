@@ -1,8 +1,8 @@
 # Hide especially the statusbar by default:
 set guioptions none
 
-set default-bg                  "#1b1b1b"
-set default-fg                  "#c5c8c6"
+set default-bg                  "#c5c8c6"
+set default-fg                  "#1b1b1b"
 
 set statusbar-fg                "#79a3c7"
 set statusbar-bg                "#333333"
@@ -31,6 +31,6 @@ set completion-highlight-bg     "#81A1C1"
 set recolor-lightcolor          "#1b1b1b"
 set recolor-darkcolor           "#c5c8c6"
 
-set recolor                     "true"
-set recolor-keephue             "true"
+#set recolor                     "true"
+#set recolor-keephue             "true"
 

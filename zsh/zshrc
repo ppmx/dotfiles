@@ -91,3 +91,7 @@ source $ZSH/oh-my-zsh.sh
 # Set personal aliases:
 alias ssh="TERM=rxvt-16color ssh"
 alias ip="ip -c"
+alias ips="ip -br -c addr show"
+alias diff="diff --color=auto"
+alias grep="grep --color=auto"
+
