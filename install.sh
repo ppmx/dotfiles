@@ -14,9 +14,6 @@ ln -sfnv "${BASEDIR}/vim" ~/.vim
 # git:
 ln -sfnv "${BASEDIR}/git/gitconfig" ~/.gitconfig
 
-# alacritty:
-ln -sfnv "${BASEDIR}/kitty" ~/.config/kitty
-
 # picom:
 ln -sfnv "${BASEDIR}/picom" ~/.config/picom
 
