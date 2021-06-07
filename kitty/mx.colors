@@ -2,27 +2,27 @@
 color0       #1d1f21
 color8       #1d1f21
 
-! red (gesetzt!)
+! red
 color1       #ef4343
 color9       #ef4343
 
-! green (gesetzte!)
+! green
 color2       #90ce42
 color10      #90ce42
 
-! yellow (gesetzt!)
+! yellow
 color3       #ffd300
 color11      #ffd300
 
-! blue (gesetzt!)
+! blue
 color4       #6795CD
 color12      #6795CD
 
-! magenta (gesetzt!)
+! magenta
 color5       #c269bc
 color13      #c269bc
 
-! cyan (gesetzt!)
+! cyan
 color6       #40d0dd
 color14      #40d0dd
 
@@ -30,14 +30,13 @@ color14      #40d0dd
 color7       #f4f5f5
 color15      #f4f5f5
 
-
 ! special
-foreground   #f4f5f5
-background   #1d1f21
+foreground   #e1e1e1
+background   #24272a
 
 cursor  #87bdb5
 
 ! yellow and background
 selection_background #ffd300
-selection_foreground #1d1f21
+selection_foreground #24272a
 

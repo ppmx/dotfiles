@@ -52,7 +52,7 @@
 
 	border: 2px;
 	border-radius: 10px;
-	border-color: @colorscheme-cyan;
+	border-color: @colorscheme-dark1;
 }
 
 // mainbox acts like a container inside window, hosting each element:

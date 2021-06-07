@@ -17,8 +17,7 @@ local theme_assets = require("beautiful.theme_assets")
 local gears        = require("gears")
 local xresources   = require("beautiful.xresources")
 local dpi          = xresources.apply_dpi
-local colorscheme = require("components.colorscheme")
-local helpers      = require("helpers")
+local colorscheme  = require("components.colorscheme")
 
 theme.dir   = os.getenv("HOME") .. "/.config/awesome/components/theme"
 
@@ -34,7 +33,7 @@ theme.dir   = os.getenv("HOME") .. "/.config/awesome/components/theme"
 
 theme.font_name = "FiraCode Nerd Font Mono" -- "sans"
 theme.font  = theme.font_name .. " " .. dpi(10)
-theme.taglist_font = "FiraCode Nerd Font Mono Bold 11"
+theme.taglist_font = "FiraCode Nerd Font Mono Bold 10"
 
 theme.fg_normal  = colorscheme.white
 theme.bg_normal  = colorscheme.bg
@@ -64,7 +63,7 @@ theme.taglist_fg_urgent = theme.bg_urgent
 theme.taglist_fg_occupied = colorscheme.blue
 theme.taglist_bg_occupied = colorscheme.black
 
-theme.taglist_spacing = dpi(4)
+theme.taglist_spacing = dpi(2)
 
 theme.taglist_fg_empty   = colorscheme.grey
 theme.taglist_bg_empty   = colorscheme.black
@@ -77,7 +76,7 @@ theme.taglist_bg_empty   = colorscheme.black
 -- | |   / _ \| |/ _ \| '__/ __|   | |/ _` / __| |/ / | / __| __|            --
 -- | |__| (_) | | (_) | |  \__ \   | | (_| \__ \   <| | \__ \ |_             --
 --  \____\___/|_|\___/|_|  |___/   |_|\__,_|___/_|\_\_|_|___/\__|            --
--------------------------------------------------------------------------------                        
+-------------------------------------------------------------------------------
 
 theme.tasklist_bg_normal = theme.bg_normal
 theme.tasklist_bg_focus  = theme.bg_normal
@@ -91,7 +90,7 @@ theme.tasklist_bg_urgent = theme.bg_normal
 -- | |   / _ \| |/ _ \| '__/ __|   | | | | __| |/ _ \ '_ \ / _` | '__|       --
 -- | |__| (_) | | (_) | |  \__ \   | | | | |_| |  __/ |_) | (_| | |          --
 --  \____\___/|_|\___/|_|  |___/   |_| |_|\__|_|\___|_.__/ \__,_|_|          --
--------------------------------------------------------------------------------                                                               
+-------------------------------------------------------------------------------
 
 theme.titlebar_fg_focus = colorscheme.yellow
 theme.titlebar_bg_focus = colorscheme.bg
@@ -128,7 +127,11 @@ theme.border_width = dpi(2)
 theme.border_normal = colorscheme.bg
 theme.border_focus  = colorscheme.blue
 theme.border_marked = colorscheme.red
-theme.border_shape  = helpers.rrect(dpi(6))
+
+theme.border_radius = dpi(8)
+theme.border_shape = function(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, theme.border_radius)
+end
 
 theme.useless_gap = dpi(12)
 
@@ -140,7 +143,7 @@ theme.useless_gap = dpi(12)
 -- |  \| |/ _ \| __| | |_| |/ __/ _` | __| |/ _ \| '_ \/ __|                 --
 -- | |\  | (_) | |_| |  _| | (_| (_| | |_| | (_) | | | \__ \                 --
 -- |_| \_|\___/ \__|_|_| |_|\___\__,_|\__|_|\___/|_| |_|___/                 --
--------------------------------------------------------------------------------   
+-------------------------------------------------------------------------------
 
 theme.notification_margin = dpi(30)
 

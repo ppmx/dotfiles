@@ -1,3 +1,17 @@
+-------------------------------------------------------------------------------
+--   __        ___     _            _     _   _      _                       --
+--   \ \      / (_) __| | __ _  ___| |_  | | | | ___| |_ __   ___ _ __       --
+--    \ \ /\ / /| |/ _` |/ _` |/ _ \ __| | |_| |/ _ \ | '_ \ / _ \ '__|      --
+--     \ V  V / | | (_| | (_| |  __/ |_  |  _  |  __/ | |_) |  __/ |         --
+--      \_/\_/  |_|\__,_|\__, |\___|\__| |_| |_|\___|_| .__/ \___|_|         --
+--                       |___/                        |_|                    --
+--    _____                 _   _                                            --
+--   |  ___|   _ _ __   ___| |_(_) ___  _ __  ___                            --
+--   | |_ | | | | '_ \ / __| __| |/ _ \| '_ \/ __|                           --
+--   |  _|| |_| | | | | (__| |_| | (_) | | | \__ \                           --
+--   |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/                           --
+-------------------------------------------------------------------------------                                        
+
 local helpers = {}
 
 local awful = require("awful")
@@ -7,59 +21,8 @@ local naughty = require("naughty")
 
 local colorscheme = require("components.colorscheme")
 
-local naroka_shape = function(cr, width, height) gears.shape.rounded_rect(cr, width, height, 10) end -- gears.shape.rounded_bar
+local theme_shape = function(cr, width, height) gears.shape.rounded_rect(cr, width, height, 10) end -- gears.shape.rounded_bar
 
--- wrap widget into a rounded-bar container with margin left and right:
-helpers.widget_colorize = function(widget, fg_color, bg_color)
-	return wibox.widget({
-		widget,
-		fg = fg_color,
-		bg = bg_color,
-		shape = function(cr, width, height) gears.shape.rounded_rect(cr, width, height, 5) end,
-		widget = wibox.container.background
-	})
-end
-
-helpers.widget_margin = function(widget)
-    return wibox.widget({
-        widget,
-        left = 5,
-        right = 5,
-        widget = wibox.container.margin
-    })
-end
-
-helpers.wrap_widget = function(widget, fg_color, bg_color)
-    return helpers.widget_margin(helpers.widget_colorize(helpers.widget_margin_inner(widget), fg_color, bg_color))
-end
-
-
-helpers.widget_factory = function(symbol, widget)
-    return wibox.widget({
-        helpers.wrap_symbol(symbol),
-        nil,
-        widget,
-		layout = wibox.layout.align.horizontal
-	})
-end
-
-
-
-
-
-
-helpers.widget_margin_inner = function(widget, left, top, right, bottom)
-    return wibox.widget({
-        widget,
-        left = left or 16,
-        right = right or 16,
-        top = top or 2,
-        bottom = bottom or 2,
-        widget = wibox.container.margin
-    })
-end
-
-----------------------------------
 
 -- Add a margin container around a widget - especially used to embed into
 -- a background container
@@ -90,8 +53,6 @@ helpers.wrap_symbol = function(symbol, symbol_size)
         widget = wibox.container.margin
     })
 end
-
-
 
 helpers.create_symbol_widget = function(symbol, widget, foreground, symbol_size)
     local widget_symbol = helpers.wrap_symbol(symbol, symbol_size)
@@ -125,24 +86,22 @@ helpers.textbox_colorized = function(text, foreground)
 end
 
 
--- __        __                               
--- \ \      / / __ __ _ _ __  _ __   ___ _ __ 
---  \ \ /\ / / '__/ _` | '_ \| '_ \ / _ \ '__|
---   \ V  V /| | | (_| | |_) | |_) |  __/ |   
---    \_/\_/ |_|  \__,_| .__/| .__/ \___|_|   
---                     |_|   |_|              
---
---
---
---
-
+-------------------------------------------------------------------------------
+--   __        __                                                            --
+--   \ \      / / __ __ _ _ __  _ __   ___ _ __                              --
+--    \ \ /\ / / '__/ _` | '_ \| '_ \ / _ \ '__|                             --
+--     \ V  V /| | | (_| | |_) | |_) |  __/ |                                --
+--      \_/\_/ |_|  \__,_| .__/| .__/ \___|_|                                --
+--                       |_|   |_|                                           --
+-------------------------------------------------------------------------------
 
 -- Wrap widget and add coloured and rounded background:
 helpers.wrapper_background = function(widget)
     return wibox.widget({
 		widget,
+
 		bg = colorscheme.black,
-		shape = naroka_shape,
+		shape = theme_shape,
 		widget = wibox.container.background
     })
 end
@@ -152,7 +111,7 @@ helpers.containerize_widget = function(widget)
     return helpers.wrapper_background(helpers.widget_add_margin(widget))
 end
 
--- Wrap widget to add a outer margin in order to embed it into
+-- Wrap widget to add an outer margin in order to embed it into
 -- the wibox with space between this and the next widget. This is the
 -- final step to place a widget into the wibox.
 helpers.embed_widget = function(widget)
@@ -167,6 +126,5 @@ end
 helpers.factorize_widget = function(widget)
     return helpers.embed_widget(helpers.containerize_widget(widget))
 end
-
 
 return helpers

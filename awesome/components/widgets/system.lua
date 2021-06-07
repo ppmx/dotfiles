@@ -1,7 +1,7 @@
+-- Widget: 'System Status'
+
 local helpers = require("components.widgets.helpers")
-
 local wibox = require("wibox")
-
 local colorscheme = require("components.colorscheme")
 
 local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
@@ -16,7 +16,7 @@ local battery_widget = batteryarc_widget({
     charging_color     = colorscheme.green
 })
 
-local system_widget = helpers.wrap_widget(
+local system_widget = helpers.factorize_widget(
     wibox.widget({
         helpers.widget_add_margin(brightnessarc_widget(), {
             right = 4,
@@ -32,18 +32,15 @@ local system_widget = helpers.wrap_widget(
         }),
 
         helpers.widget_add_margin(battery_widget, {
-            left = 4,
-        
+            left = 4,        
             top = 2, bottom = 2
         }),
 
         layout = wibox.layout.align.horizontal
     }),
 
-
     colorscheme.white,
     colorscheme.black
 )
-
 
 return system_widget

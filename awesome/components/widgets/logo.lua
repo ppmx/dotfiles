@@ -1,3 +1,5 @@
+-- Widget: "Logo"
+
 local helpers = require("components.widgets.helpers")
 
 local symbols = {
@@ -9,7 +11,7 @@ local symbols = {
     helpers.wrap_symbol("")
 }
 
-local current_symbol = 6
+local current_symbol = 5
 local logo = helpers.factorize_widget(symbols[current_symbol])
 
 logo:connect_signal('button::press',
